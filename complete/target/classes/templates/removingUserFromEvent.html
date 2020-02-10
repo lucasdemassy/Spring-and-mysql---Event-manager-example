@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head> 
+        <title>Getting Started: Serving Web Content</title> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>  
+        <div style="border: 4px dashed black;">
+            <h2>Add an user to an event</h2>
+            <form action="/demo/removing/event" method="get" id="remove">
+                Selected event:<br>
+                
+                <select form="remove" name="eventname">
+                    <option th:value="${event.getName()}" 
+                            th:text="${event.getName()}" selected></option>
+                </select>
+                User:<br>
+                <select form="remove" name="userID">
+                    <option th:each="users : ${users}" 
+                            th:value="${users.getId()}" 
+                            th:text="${users.getName()}"></option>
+                </select>
+                <input type="submit" value="Removing">
+            </form> 
+        </div>
+    </body>
+</html>

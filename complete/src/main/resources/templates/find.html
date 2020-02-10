@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>    
+    <table>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>User(s) participating</th>
+      </tr>
+      <tr th:each="event : ${json}">
+        <td th:text="${event.getName()}"></td>
+        <td th:text="${event.getDate()}"></td>
+        <td th:text="${event.getUsersToString()}"></td>
+      </tr>
+    </table>
+    
+    
+    
+</body>
+</html>

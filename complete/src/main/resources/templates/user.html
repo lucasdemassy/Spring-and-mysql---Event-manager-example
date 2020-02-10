@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    
+    <div style="border: 4px dashed black;">
+        <h2>Create a new user</h2>
+        <form action="/demo/create" method="post" id="create">
+            Username:<br>
+            <input type="text" name="username" placeholder="Mickey"><br>
+            Email:<br>
+            <input type="text" name="email" placeholder="mickey.mouse@disney.ca"><br>
+            Event to join:<br>
+            <select form="create" name="eventname">
+                <option th:each="events : ${events}" 
+                        th:value="${events.getName()}" 
+                        th:text="${events.getName()}"></option>
+            </select>
+            <input type="submit" value="Create">
+        </form> 
+    </div>
+    
+    <br>
+    
+    <div style="border: 4px dashed black;">
+        <h2>Add an user to an event</h2>
+        <form action="/demo/add" method="post" id="add">
+            User:<br>
+            <select form="add" name="username">
+                <option th:each="users : ${users}" 
+                        th:value="${users.getName()}" 
+                        th:text="${users.getName()}"></option>
+            </select>
+            <br>
+            Event to joined:<br>
+            <select form="add" name="eventname">
+                <option th:each="events : ${events}" 
+                        th:value="${events.getName()}" 
+                        th:text="${events.getName()}"></option>
+            </select>
+            <input type="submit" value="Add">
+        </form> 
+    </div>
+    
+    <br>
+    
+    
+    <br>
+    <div style="border: 4px dashed black;">
+        <h2>Delete an user</h2>
+        <form action="/demo/delete" method="post" id="delete">
+            User:<br>
+            <select form="delete" name="username">
+                <option th:each="users : ${users}" 
+                        th:value="${users.getName()}" 
+                        th:text="${users.getName()}"></option>
+            </select>
+            <input type="submit" value="Delete">
+        </form> 
+    </div>
+    
+    
+</body>
+</html>

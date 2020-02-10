@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+    <body>
+        <div style="border: 4px dashed black;">
+            <h2>Create an event</h2>
+            <form action="/demo/join" method="post">
+                Event name:<br>
+                <input type="text" name="name" placeholder="Festival d'Angoulême"><br>
+                Date:<br>
+                <input type="date" name="date" value="2020-02-23"><br><br>
+                <input type="submit" value="Submit">
+            </form> 
+        </div>
+        
+        <br>
+        
+        <div style="border: 4px dashed black;">
+            <h2>Remove an user from an event</h2>
+            <form action="/demo/remove/event" method="get" id="remove">
+                Choose an event:<br>
+                <select form="remove" name="eventname">
+                    <option th:each="events : ${events}" 
+                            th:value="${events.getName()}" 
+                            th:text="${events.getName()}"></option>
+                </select>
+                <input type="submit" value="Go to user removing part">
+            </form> 
+        </div>
+        
+        
+    </body>
+</html>
