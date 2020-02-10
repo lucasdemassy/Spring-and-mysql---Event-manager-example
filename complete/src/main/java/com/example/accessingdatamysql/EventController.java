@@ -25,7 +25,7 @@ public class EventController {
         
         @PostMapping(path="/join") // Map ONLY POST Requests
 	public String addNewEvent (@RequestParam String name
-			, @RequestParam String date, Model model) {
+			, @RequestParam String date) {
             // @ResponseBody means the returned String is the response, not a view name
             // @RequestParam means it is a parameter from the GET or POST request
 
@@ -33,7 +33,7 @@ public class EventController {
             e.setName(name);
             e.setDate(date);
             eventRepository.save(e);
-            return getAllEvents(model);
+            return "redirect:find";
 	}
         
         @GetMapping(path="/find")
@@ -64,9 +64,8 @@ public class EventController {
         
         
         @GetMapping(path="/removing/event")
-	public String removeUser(Model model, @RequestParam Integer userID, @RequestParam String eventname) {
+	public String removeUser(@RequestParam Integer userID, @RequestParam String eventname) {
             // This returns a JSON or XML with the users
-            System.out.println(userID);
             List<User> users = (List<User>) userRepository.findAll();  
             User user = null;
             for(int i = 0; i < users.size(); i++){
@@ -81,15 +80,12 @@ public class EventController {
             for(int i = 0; i < events.size(); i++){
                 if(events.get(i).getName().equals(eventname)){
                     event = events.get(i);
-                    System.out.println("Event found");
                 } else {
                 }
             }           
-            System.out.println(user.getName());
-            System.out.println(event.getName());
             user.getEvents().remove(event);
             event.getUsers().remove(user);
-            return getAllEvents(model);
+            return "redirect:../find";
 	}
         
               

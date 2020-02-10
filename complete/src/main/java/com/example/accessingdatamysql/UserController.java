@@ -1,5 +1,6 @@
 package com.example.accessingdatamysql;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -26,7 +27,7 @@ public class UserController {
         private EventRepository eventRepository;
 
 	@PostMapping(path="/create") // Map ONLY POST Requests
-	public @ResponseBody String CreateNewUser (@RequestParam String username
+	public String CreateNewUser (@RequestParam String username
 			, @RequestParam String email, @RequestParam String eventname) {
             // @ResponseBody means the returned String is the response, not a view name
             // @RequestParam means it is a parameter from the GET or POST request
@@ -43,15 +44,15 @@ public class UserController {
                 }
             }
             n.addEvent(event);
-            
+            event.addUser(n);
             userRepository.save(n);
-            return "Saved";
+            return "redirect:all";
 	}
         
         
         @PostMapping(path="/add") // Map ONLY POST Requests
-	public @ResponseBody String addNewUser (@RequestParam String username
-			, @RequestParam String eventname) {
+	public String addNewUser (@RequestParam String username
+			, @RequestParam String eventname, Model model) {
             // @ResponseBody means the returned String is the response, not a view name
             // @RequestParam means it is a parameter from the GET or POST request
             List<User> users = (List<User>) userRepository.findAll();   
@@ -74,7 +75,7 @@ public class UserController {
             event.addUser(user);
             user.addEvent(event);
             eventRepository.save(event);
-            return "Saved";
+            return "redirect:all";
 	}
         
 
@@ -87,7 +88,7 @@ public class UserController {
 	}
                 
         @PostMapping(path="/delete") // Map ONLY POST Requests
-	public @ResponseBody String deleteUser (@RequestParam String username) {
+	public String deleteUser (@RequestParam String username) {
             // @ResponseBody means the returned String is the response, not a view name
             // @RequestParam means it is a parameter from the GET or POST request
             List<User> users = (List<User>) userRepository.findAll();   
@@ -99,7 +100,7 @@ public class UserController {
                 }
             }
             userRepository.delete(user);
-            return "deleted";
+            return "redirect:all";
 	}
         
         @GetMapping("/register/user")

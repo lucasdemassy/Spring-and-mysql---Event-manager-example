@@ -25,7 +25,7 @@ public class User {
 	private String email;
         
         @ManyToMany(mappedBy = "users")
-        private List<Event> events = new ArrayList();
+        private List<Event> events = new ArrayList<Event>();
         
 	public Integer getId() {
 		return id;
@@ -78,7 +78,7 @@ public class User {
             }
             if(result.length() > 2){
                 result = result.substring(0, result.length() - 2);
-            }
+            }     
             return result;
         }
         
