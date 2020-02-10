@@ -1,7 +1,7 @@
-/home/formation/J2E/gs-accessing-data-mysql/complete/src/main/java/com/example/accessingdatamysql/User.java
-/home/formation/J2E/gs-accessing-data-mysql/complete/src/main/java/com/example/accessingdatamysql/AccessingDataMysqlApplication.java
-/home/formation/J2E/gs-accessing-data-mysql/complete/src/main/java/com/example/accessingdatamysql/EventController.java
-/home/formation/J2E/gs-accessing-data-mysql/complete/src/main/java/com/example/accessingdatamysql/UserController.java
-/home/formation/J2E/gs-accessing-data-mysql/complete/src/main/java/com/example/accessingdatamysql/Event.java
-/home/formation/J2E/gs-accessing-data-mysql/complete/src/main/java/com/example/accessingdatamysql/EventRepository.java
-/home/formation/J2E/gs-accessing-data-mysql/complete/src/main/java/com/example/accessingdatamysql/UserRepository.java
+/home/formation/J2E/gs-accessing-data-mysql/Spring-and-mysql---Event-manager-example/complete/src/main/java/com/example/accessingdatamysql/EventRepository.java
+/home/formation/J2E/gs-accessing-data-mysql/Spring-and-mysql---Event-manager-example/complete/src/main/java/com/example/accessingdatamysql/User.java
+/home/formation/J2E/gs-accessing-data-mysql/Spring-and-mysql---Event-manager-example/complete/src/main/java/com/example/accessingdatamysql/UserRepository.java
+/home/formation/J2E/gs-accessing-data-mysql/Spring-and-mysql---Event-manager-example/complete/src/main/java/com/example/accessingdatamysql/UserController.java
+/home/formation/J2E/gs-accessing-data-mysql/Spring-and-mysql---Event-manager-example/complete/src/main/java/com/example/accessingdatamysql/Event.java
+/home/formation/J2E/gs-accessing-data-mysql/Spring-and-mysql---Event-manager-example/complete/src/main/java/com/example/accessingdatamysql/EventController.java
+/home/formation/J2E/gs-accessing-data-mysql/Spring-and-mysql---Event-manager-example/complete/src/main/java/com/example/accessingdatamysql/AccessingDataMysqlApplication.java

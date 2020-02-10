@@ -22,9 +22,9 @@
             <h2>Remove an user from an event</h2>
             <form action="/demo/remove/event" method="get" id="remove">
                 Choose an event:<br>
-                <select form="remove" name="eventname">
+                <select form="remove" name="eventID">
                     <option th:each="events : ${events}" 
-                            th:value="${events.getName()}" 
+                            th:value="${events.getId()}" 
                             th:text="${events.getName()}"></option>
                 </select>
                 <input type="submit" value="Go to user removing part">

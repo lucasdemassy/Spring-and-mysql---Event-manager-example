@@ -28,7 +28,7 @@ public class UserController {
 
 	@PostMapping(path="/create") // Map ONLY POST Requests
 	public String CreateNewUser (@RequestParam String username
-			, @RequestParam String email, @RequestParam String eventname) {
+			, @RequestParam String email, @RequestParam Integer eventID) {
             // @ResponseBody means the returned String is the response, not a view name
             // @RequestParam means it is a parameter from the GET or POST request
             User n = new User();
@@ -38,7 +38,7 @@ public class UserController {
             List<Event> events = (List<Event>) eventRepository.findAll();
             Event event = events.get(1);       
             for(int i = 0; i < events.size(); i++){
-                if(events.get(i).getName().equals(eventname)){
+                if(events.get(i).getId().equals(eventID)){
                     event = events.get(i);
                 } else {
                 }
@@ -51,14 +51,14 @@ public class UserController {
         
         
         @PostMapping(path="/add") // Map ONLY POST Requests
-	public String addNewUser (@RequestParam String username
-			, @RequestParam String eventname, Model model) {
+	public String addNewUser (@RequestParam Integer userID
+			, @RequestParam Integer eventID) {
             // @ResponseBody means the returned String is the response, not a view name
             // @RequestParam means it is a parameter from the GET or POST request
             List<User> users = (List<User>) userRepository.findAll();   
             User user = null;
             for(int i = 0; i < users.size(); i++){
-                if(users.get(i).getName().equals(username)){
+                if(users.get(i).getId().equals(userID)){
                     user = users.get(i);
                 } else {
                 }
@@ -67,38 +67,46 @@ public class UserController {
             List<Event> events = (List<Event>) eventRepository.findAll();  
             Event event = null;
             for(int i = 0; i < events.size(); i++){
-                if(events.get(i).getName().equals(eventname)){
+                if(events.get(i).getId().equals(eventID)){
                     event = events.get(i);
                 } else {
                 }
             }
-            event.addUser(user);
-            user.addEvent(event);
-            eventRepository.save(event);
-            return "redirect:all";
+            
+            if(!event.getUsers().contains(user) && !user.getEvents().contains(event)){
+                event.addUser(user);
+                user.addEvent(event);
+                eventRepository.save(event);
+                return "redirect:all";
+            }
+            else{
+                return "redirect:all?message=ERROR : user already added";
+            }
 	}
         
 
 	@GetMapping(path="/all")
-	public String getAllUsers(Model model) {
+	public String getAllUsers(Model model, @RequestParam(name="message", required=false, defaultValue="") String message) {
             // This returns a JSON or XML with the users
             Iterable<User> json = userRepository.findAll();
             model.addAttribute("json", json);
+            model.addAttribute("message", message);
             return "all";
 	}
                 
         @PostMapping(path="/delete") // Map ONLY POST Requests
-	public String deleteUser (@RequestParam String username) {
+	public String deleteUser (@RequestParam Integer userID) {
             // @ResponseBody means the returned String is the response, not a view name
             // @RequestParam means it is a parameter from the GET or POST request
             List<User> users = (List<User>) userRepository.findAll();   
             User user = null;
             for(int i = 0; i < users.size(); i++){
-                if(users.get(i).getName().equals(username)){
+                if(users.get(i).getId().equals(userID)){
                     user = users.get(i);
                 } else {
                 }
             }
+            user.clearEvents();
             userRepository.delete(user);
             return "redirect:all";
 	}

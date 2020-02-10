@@ -46,12 +46,12 @@ public class EventController {
 	}
         
         @GetMapping(path="/remove/event")
-	public String chooseUser(Model model, @RequestParam String eventname) {
+	public String chooseUser(Model model, @RequestParam Integer eventID) {
             // This returns a JSON or XML with the users
             List<Event> events = (List<Event>) eventRepository.findAll();  
             Event event = null;
             for(int i = 0; i < events.size(); i++){
-                if(events.get(i).getName().equals(eventname)){
+                if(events.get(i).getId().equals(eventID)){
                     event = events.get(i);
                 } else {
                 }
@@ -64,7 +64,7 @@ public class EventController {
         
         
         @GetMapping(path="/removing/event")
-	public String removeUser(@RequestParam Integer userID, @RequestParam String eventname) {
+	public String removeUser(@RequestParam Integer userID, @RequestParam Integer eventID) {
             // This returns a JSON or XML with the users
             List<User> users = (List<User>) userRepository.findAll();  
             User user = null;
@@ -78,7 +78,7 @@ public class EventController {
             List<Event> events = (List<Event>) eventRepository.findAll();  
             Event event = null;
             for(int i = 0; i < events.size(); i++){
-                if(events.get(i).getName().equals(eventname)){
+                if(events.get(i).getId().equals(eventID)){
                     event = events.get(i);
                 } else {
                 }

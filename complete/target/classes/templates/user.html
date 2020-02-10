@@ -14,9 +14,9 @@
             Email:<br>
             <input type="text" name="email" placeholder="mickey.mouse@disney.ca"><br>
             Event to join:<br>
-            <select form="create" name="eventname">
+            <select form="create" name="eventID">
                 <option th:each="events : ${events}" 
-                        th:value="${events.getName()}" 
+                        th:value="${events.getId()}" 
                         th:text="${events.getName()}"></option>
             </select>
             <input type="submit" value="Create">
@@ -29,16 +29,16 @@
         <h2>Add an user to an event</h2>
         <form action="/demo/add" method="post" id="add">
             User:<br>
-            <select form="add" name="username">
+            <select form="add" name="userID">
                 <option th:each="users : ${users}" 
-                        th:value="${users.getName()}" 
+                        th:value="${users.getId()}" 
                         th:text="${users.getName()}"></option>
             </select>
             <br>
             Event to joined:<br>
-            <select form="add" name="eventname">
+            <select form="add" name="eventID">
                 <option th:each="events : ${events}" 
-                        th:value="${events.getName()}" 
+                        th:value="${events.getId()}" 
                         th:text="${events.getName()}"></option>
             </select>
             <input type="submit" value="Add">
@@ -53,9 +53,9 @@
         <h2>Delete an user</h2>
         <form action="/demo/delete" method="post" id="delete">
             User:<br>
-            <select form="delete" name="username">
+            <select form="delete" name="userID">
                 <option th:each="users : ${users}" 
-                        th:value="${users.getName()}" 
+                        th:value="${users.getId()}" 
                         th:text="${users.getName()}"></option>
             </select>
             <input type="submit" value="Delete">

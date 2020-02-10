@@ -90,5 +90,11 @@ public class User {
             this.events.add(event);
         }
         
+        public void clearEvents(){
+            for(int i = 0; i < this.events.size(); i++){
+                this.events.get(i).getUsers().remove(this);
+            }
+            this.events.clear();
+        }
         
 }
