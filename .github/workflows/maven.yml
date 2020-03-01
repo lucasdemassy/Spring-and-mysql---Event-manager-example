@@ -15,6 +15,7 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run:  |
+        bash ls -l
         bash cd complete/
         bash ./mvnw spring-boot:run
         sleep 20
