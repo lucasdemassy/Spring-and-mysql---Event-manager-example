@@ -7,14 +7,19 @@ Open a terminal (command prompt in Microsoft Windows) and open a MySQL client as
 
 For example, on a Linux system, use the following command;
 
-`sudo mysql --password`
+1. `sudo mysql --password`
 
 This connects to MySQL as root and allows access to the user from all hosts. This is not the recommended way for a production server.
 
 To create a new database, run the following commands at the mysql prompt:
 
-`create database db_example;` --> Creates the new database
+2. `create database j2e_event_manager;` --> Creates the new database
 
-`create user 'springuser'@'%' identified by 'ThePassword';` --> Creates the user
+3. `create user 'admin'@'%' identified by 'adminPassword';` --> Creates the user
 
-`grant all on db_example.* to 'springuser'@'%';` --> Gives all privileges to the new user on the newly created database
+4. `grant all on j2e_event_manager.* to 'admin'@'%';` --> Gives all privileges to the new user on the newly created database
+
+## Access the event manager
+1. `cd complete`
+2. `./mvnw spring-boot:run`
+3. `http://localhost:8080/demo/register/event`
