@@ -34,19 +34,22 @@ public class UserController {
             User n = new User();
             n.setName(username);
             n.setEmail(email);
-            
+            System.out.println();
             List<Event> events = (List<Event>) eventRepository.findAll();
-            Event event = events.get(1);       
+            Event event = null;
             for(int i = 0; i < events.size(); i++){
                 if(events.get(i).getId().equals(eventID)){
                     event = events.get(i);
                 } else {
                 }
             }
+            if(event == null){
+                return "redirect:all_event?message=ERROR : No event found";
+            }
             n.addEvent(event);
             event.addUser(n);
             userRepository.save(n);
-            return "redirect:all";
+            return "redirect:all_user";
 	}
         
         
@@ -63,6 +66,9 @@ public class UserController {
                 } else {
                 }
             }
+            if(user == null){
+                return "redirect:all_user?message=ERROR : No user found";
+            }
             
             List<Event> events = (List<Event>) eventRepository.findAll();  
             Event event = null;
@@ -72,29 +78,32 @@ public class UserController {
                 } else {
                 }
             }
+            if(event == null){
+                return "redirect:all_event?message=ERROR : No event found";
+            }
             
             if(!event.getUsers().contains(user) && !user.getEvents().contains(event)){
                 event.addUser(user);
                 user.addEvent(event);
                 eventRepository.save(event);
-                return "redirect:all";
+                return "redirect:all_user";
             }
             else{
-                return "redirect:all?message=ERROR : user already added";
+                return "redirect:all_user?message=ERROR : user already added";
             }
 	}
         
 
-	@GetMapping(path="/all")
+	@GetMapping(path="/all_user")
 	public String getAllUsers(Model model, @RequestParam(name="message", required=false, defaultValue="") String message) {
             // This returns a JSON or XML with the users
             Iterable<User> json = userRepository.findAll();
             model.addAttribute("json", json);
             model.addAttribute("message", message);
-            return "all";
+            return "all_user";
 	}
                 
-        @PostMapping(path="/delete") // Map ONLY POST Requests
+        @PostMapping(path="/delete_user") // Map ONLY POST Requests
 	public String deleteUser (@RequestParam Integer userID) {
             // @ResponseBody means the returned String is the response, not a view name
             // @RequestParam means it is a parameter from the GET or POST request
@@ -106,9 +115,12 @@ public class UserController {
                 } else {
                 }
             }
+            if(user == null){
+                return "redirect:all_user?message=ERROR : No user found";
+            }
             user.clearEvents();
             userRepository.delete(user);
-            return "redirect:all";
+            return "redirect:all_user";
 	}
         
         @GetMapping("/register/user")

@@ -8,7 +8,7 @@
     <table>
       <tr>
         <th>Username</th>
-        <th>Email</th>
+        <th>Date</th>
         <th>User(s) participating</th>
       </tr>
       <tr th:each="event : ${json}">
@@ -17,8 +17,13 @@
         <td th:text="${event.getUsersToString()}"></td>
       </tr>
     </table>
-    
-    
+    <p th:text="${message}"></p>
+    <br>
+    <a href="http://localhost:8080/demo/register/event">Go to event registering</a> 
+    <br>
+    <a href="http://localhost:8080/demo/register/user">Go to user registering</a>
+    <br>
+    <a href="http://localhost:8080/demo/all_user">Go to user listing</a> 
     
 </body>
 </html>

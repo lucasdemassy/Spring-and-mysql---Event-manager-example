@@ -8,21 +8,23 @@
     <table>
       <tr>
         <th>Username</th>
-        <th>Date</th>
-        <th>User(s) participating</th>
+        <th>Email</th>
+        <th>Event(s) joined</th>
       </tr>
-      <tr th:each="event : ${json}">
-        <td th:text="${event.getName()}"></td>
-        <td th:text="${event.getDate()}"></td>
-        <td th:text="${event.getUsersToString()}"></td>
+      <tr th:each="user : ${json}">
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getEventsToString()}"></td>
       </tr>
     </table>
+    <p th:text="${message}"></p>
+    
     <br>
     <a href="http://localhost:8080/demo/register/event">Go to event registering</a> 
     <br>
     <a href="http://localhost:8080/demo/register/user">Go to user registering</a>
     <br>
-    <a href="http://localhost:8080/demo/all">Go to user listing</a> 
+    <a href="http://localhost:8080/demo/all_event">Go to event listing</a> 
     
 </body>
 </html>

@@ -51,7 +51,7 @@
     <br>
     <div style="border: 4px dashed black;">
         <h2>Delete an user</h2>
-        <form action="/demo/delete" method="post" id="delete">
+        <form action="/demo/delete_user" method="post" id="delete">
             User:<br>
             <select form="delete" name="userID">
                 <option th:each="users : ${users}" 
@@ -62,6 +62,11 @@
         </form> 
     </div>
     
-    
+    <br>
+    <a href="http://localhost:8080/demo/register/event">Go to event registering</a>
+    <br>
+    <a href="http://localhost:8080/demo/all_user">Go to user listing</a>
+    <br>
+    <a href="http://localhost:8080/demo/all_event">Go to event listing</a> 
 </body>
 </html>

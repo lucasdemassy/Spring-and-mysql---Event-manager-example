@@ -31,6 +31,25 @@
             </form> 
         </div>
         
+        <br>
+        <div style="border: 4px dashed black;">
+            <h2>Delete an event</h2>
+            <form action="/demo/delete_event" method="post" id="delete">
+                User:<br>
+                <select form="delete" name="eventID">
+                    <option th:each="events : ${events}" 
+                            th:value="${events.getId()}" 
+                            th:text="${events.getName()}"></option>
+                </select>
+                <input type="submit" value="Delete">
+            </form> 
+        </div>
         
+    <br>
+    <a href="http://localhost:8080/demo/register/user">Go to user registering</a>
+    <br>
+    <a href="http://localhost:8080/demo/all_user">Go to user listing</a>
+    <br>
+    <a href="http://localhost:8080/demo/all_event">Go to event listing</a> 
     </body>
 </html>

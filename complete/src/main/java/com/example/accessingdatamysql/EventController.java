@@ -33,15 +33,16 @@ public class EventController {
             e.setName(name);
             e.setDate(date);
             eventRepository.save(e);
-            return "redirect:find";
+            return "redirect:all_event";
 	}
         
-        @GetMapping(path="/find")
-	public String getAllEvents(Model model) {
+        @GetMapping(path="/all_event")
+	public String getAllEvents(Model model, @RequestParam(name="message", required=false, defaultValue="") String message) {
             // This returns a JSON or XML with the users
             Iterable<Event> json = eventRepository.findAll();
             model.addAttribute("json", json);
-            return "find";
+            model.addAttribute("message", message);
+            return "all_event";
             
 	}
         
@@ -55,7 +56,10 @@ public class EventController {
                     event = events.get(i);
                 } else {
                 }
-            }           
+            }    
+            if(event == null){
+                return "redirect:../all_event?message=ERROR : No event found";
+            }
             List<User> users = event.getUsers();
             model.addAttribute("event", event);
             model.addAttribute("users", users);
@@ -64,16 +68,18 @@ public class EventController {
         
         
         @GetMapping(path="/removing/event")
-	public String removeUser(@RequestParam Integer userID, @RequestParam Integer eventID) {
+	public String removeUser(@RequestParam(defaultValue="") Integer userID, @RequestParam(defaultValue="") Integer eventID) {
             // This returns a JSON or XML with the users
             List<User> users = (List<User>) userRepository.findAll();  
             User user = null;
             for(int i = 0; i < users.size(); i++){
                 if(users.get(i).getId().equals(userID)){
                     user = users.get(i);
-                    System.out.println("User found");
                 } else {
                 }
+            }
+            if(user == null){
+                return "redirect:../all_user?message=ERROR : No user found";
             }
             List<Event> events = (List<Event>) eventRepository.findAll();  
             Event event = null;
@@ -82,10 +88,15 @@ public class EventController {
                     event = events.get(i);
                 } else {
                 }
-            }           
+            }  
+            if(event == null){
+                return "redirect:../all_event?message=ERROR : No event found";
+            }
             user.getEvents().remove(event);
             event.getUsers().remove(user);
-            return "redirect:../find";
+            userRepository.save(user);
+            eventRepository.save(event);
+            return "redirect:../all_event";
 	}
         
               
@@ -96,5 +107,26 @@ public class EventController {
             model.addAttribute("users", users);
             model.addAttribute("events", events);
             return "event";
+	}
+        
+        
+        @PostMapping(path="/delete_event") // Map ONLY POST Requests
+	public String deleteUser (@RequestParam Integer eventID) {
+            // @ResponseBody means the returned String is the response, not a view name
+            // @RequestParam means it is a parameter from the GET or POST request
+            List<Event> events = (List<Event>) eventRepository.findAll();   
+            Event event = null;
+            for(int i = 0; i < events.size(); i++){
+                if(events.get(i).getId().equals(eventID)){
+                    event = events.get(i);
+                } else {
+                }
+            }
+            if(event == null){
+                return "redirect:all_event?message=ERROR : No event found";
+            }
+            event.clearUsers();
+            eventRepository.delete(event);
+            return "redirect:all_event";
 	}
 }

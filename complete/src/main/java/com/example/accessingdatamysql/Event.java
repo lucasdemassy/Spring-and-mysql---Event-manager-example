@@ -71,4 +71,11 @@ public class Event {
             }
             return result;
         }
+        
+        public void clearUsers(){
+            for(int i = 0; i < this.users.size(); i++){
+                this.users.get(i).getEvents().remove(this);
+            }
+            this.users.clear();
+        }
 }
